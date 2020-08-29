@@ -1,8 +1,141 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ship/ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/background/star_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/background/bg_1.png" type="Texture" id=3]
+[ext_resource path="res://testing_scene.gd" type="Script" id=4]
+[ext_resource path="res://assets/background/star_2.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "starblink"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 3, 2, 1 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "starblink"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 3, 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "starblink"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 3, 2, 1, 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "starblink"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 4, 3, 2, 1, 0, 1 ]
+}
 
 [node name="testing_scene" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 160, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 80, 71.5796 )
+texture = ExtResource( 3 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 1 )
+motion_mirroring = Vector2( 160, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 33.6579, 32.116 )
+rotation = -0.261799
+texture = ExtResource( 2 )
+vframes = 2
+hframes = 3
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 74.0155, 105.133 )
+rotation = 0.261799
+texture = ExtResource( 2 )
+vframes = 2
+hframes = 3
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer2"]
+anims/starblink = SubResource( 1 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer2"]
+anims/starblink = SubResource( 2 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.2, 1 )
+motion_mirroring = Vector2( 160, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 121.089, 35.7381 )
+texture = ExtResource( 5 )
+vframes = 2
+hframes = 3
+frame = 3
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 112.26, 96.2826 )
+rotation = -1.309
+texture = ExtResource( 5 )
+vframes = 2
+hframes = 3
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer3"]
+anims/starblink = SubResource( 3 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer3"]
+anims/starblink = SubResource( 4 )
 
 [node name="ship" parent="." instance=ExtResource( 1 )]
-position = Vector2( 14.0462, 61.0745 )
+position = Vector2( 16.2937, 69.257 )
