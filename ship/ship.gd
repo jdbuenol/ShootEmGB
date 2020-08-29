@@ -21,7 +21,7 @@ func _physics_process(_delta):
 		velocity.y = -SPEED
 	elif Input.is_action_pressed("ui_down"):
 		velocity.y = SPEED
-	velocity.x = SPEED
+	velocity.x = SPEED * 2
 # warning-ignore:return_value_discarded
 	move_and_slide(velocity)
 	if position.y < 7:
