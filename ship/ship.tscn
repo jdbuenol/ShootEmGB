@@ -27,7 +27,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=3]
 resource_name = "attack"
 length = 0.6
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("main_ship:frame")
 tracks/0/interp = 1
@@ -43,14 +42,12 @@ tracks/0/keys = {
 
 [node name="ship" type="KinematicBody2D"]
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="main_ship" type="Sprite" parent="."]
 position = Vector2( -1.52588e-05, 0 )
 texture = ExtResource( 1 )
 vframes = 3
+frame = 2
 
 [node name="fuel" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -74,4 +71,18 @@ offset = Vector2( 60, 0 )
 current = true
 limit_top = 0
 limit_bottom = 0
+
+[node name="bullet" type="Position2D" parent="."]
+position = Vector2( 6.384, 0 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.61
+one_shot = true
+
+[node name="spawnEnemy" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
 [connection signal="timeout" from="PowerOffTimer" to="." method="_on_PowerOffTimer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="spawnEnemy" to="." method="_on_spawnEnemy_timeout"]

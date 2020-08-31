@@ -23,7 +23,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 3, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "starblink"
 length = 1.6
 loop = true
@@ -40,8 +40,7 @@ tracks/0/keys = {
 "values": [ 3, 4, 3, 2, 1, 0, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "starblink"
+[sub_resource type="Animation" id=3]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -115,7 +114,7 @@ hframes = 3
 frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer3"]
-anims/starblink = SubResource( 3 )
+anims/starblink = SubResource( 2 )
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.3, 1 )
@@ -131,7 +130,7 @@ hframes = 3
 frame = 1
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer4"]
-anims/starblink = SubResource( 2 )
+anims/starblink = SubResource( 3 )
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.4, 1 )
