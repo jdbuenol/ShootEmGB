@@ -1,0 +1,146 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Early GameBoy.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ShootEmGB.gd" type="Script" id=2]
+[ext_resource path="res://assets/ship/ship_attack.png" type="Texture" id=3]
+[ext_resource path="res://assets/background/BG_T.png.png" type="Texture" id=4]
+[ext_resource path="res://assets/enemies/enemy_ship.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[node name="ShootEmGB" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 160.0
+margin_bottom = 144.0
+color = Color( 1, 0.964706, 0.827451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG_Tpng" type="Sprite" parent="."]
+position = Vector2( 80, 72 )
+texture = ExtResource( 4 )
+
+[node name="BG_Tpng2" type="Sprite" parent="."]
+position = Vector2( 80, 72 )
+texture = ExtResource( 4 )
+flip_v = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 182.0
+margin_bottom = 24.0
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0.486275, 0.247059, 0.345098, 1 )
+text = "Shoot em gb"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = 66.0
+margin_top = 44.0
+margin_right = 157.0
+margin_bottom = 65.0
+color = Color( 0.486275, 0.247059, 0.345098, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 72.3243
+margin_top = 44.8919
+margin_right = 152.324
+margin_bottom = 64.8919
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.921569, 0.419608, 0.435294, 1 )
+text = "START"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+margin_left = 20.0
+margin_top = 73.0
+margin_right = 137.0
+margin_bottom = 94.0
+color = Color( 0.486275, 0.247059, 0.345098, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 25.7297
+margin_top = 73.2973
+margin_right = 137.73
+margin_bottom = 93.2973
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.921569, 0.419608, 0.435294, 1 )
+text = "credits"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+margin_left = 3.0
+margin_top = 107.0
+margin_right = 72.0
+margin_bottom = 128.0
+color = Color( 0.486275, 0.247059, 0.345098, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="."]
+margin_left = -0.486679
+margin_top = 107.595
+margin_right = 79.5133
+margin_bottom = 127.595
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.921569, 0.419608, 0.435294, 1 )
+text = "EXIT"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ship_attack" type="Sprite" parent="."]
+position = Vector2( 125, 119 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+vframes = 3
+
+[node name="enemy_ship" type="Sprite" parent="."]
+position = Vector2( 39, 50 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+hframes = 2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="powerOff" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="powerOff" to="." method="_on_powerOff_timeout"]

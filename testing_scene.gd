@@ -1,5 +1,10 @@
 extends Node2D
 
+const WIN_SCREEN : PackedScene = preload("res://winScreen/winScreen.tscn")
+
+var score : int = 0
+var win_score : int = 1000
+
 #This executes at the start of the scene
 func _ready():
 	randomize()
@@ -15,3 +20,15 @@ func _ready():
 	$ParallaxBackground/ParallaxLayer4/AnimationPlayer2.play("starblink")
 	$ParallaxBackground/ParallaxLayer3/AnimationPlayer.play("starblink")
 	$ParallaxBackground/ParallaxLayer5/AnimationPlayer2.play("starblink")
+
+#Check if you won
+func check_score():
+	$CanvasLayer/Label.text = str(score)
+	if score >= 1000:
+		for x in get_children():
+			if x == $ParallaxBackground:
+				pass
+			else:
+				x.queue_free()
+		var win_screen : Control = WIN_SCREEN.instance()
+		add_child(win_screen)

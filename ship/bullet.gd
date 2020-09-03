@@ -8,7 +8,7 @@ func _physics_process(_delta):
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
-
+#When hits an enemy
 func _on_bullet_body_entered(body):
 	if "enemy" in body.name:
 		body.get_hurt()

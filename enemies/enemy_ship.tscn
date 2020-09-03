@@ -60,4 +60,24 @@ shape = SubResource( 2 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 anims/death = SubResource( 3 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( -5.43692, 0.0350771 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -0.372048, 0.0496066 )
+scale = Vector2( 0.352638, 0.414646 )
+
+[node name="directionTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+autostart = true
 [connection signal="animation_finished" from="AnimationPlayer2" to="." method="_on_AnimationPlayer2_animation_finished"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="directionTimer" to="." method="_on_directionTimer_timeout"]

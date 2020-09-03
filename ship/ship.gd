@@ -36,7 +36,7 @@ func _physics_process(_delta):
 	if get_slide_count() > 0:
 		for x in get_slide_count():
 			if "enemy" in get_slide_collision(x).collider.name:
-				queue_free()
+				get_hurt()
 
 	if position.y < 7:
 		position.y = 7
@@ -68,3 +68,7 @@ func _on_spawnEnemy_timeout():
 	enemy_ship.global_position.x += 200
 	enemy_ship.global_position.y = int(rand_range(20, 124))
 	$spawnEnemy.start()
+
+#Die
+func get_hurt():
+	queue_free()
