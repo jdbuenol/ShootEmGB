@@ -31,9 +31,24 @@ func check_score():
 	$CanvasLayer/Label.text = str(score)
 	if score >= 1000:
 		for x in get_children():
-			if x == $ParallaxBackground:
+			if x == $ParallaxBackground or x == $PowerOffTimer:
 				pass
 			else:
 				x.queue_free()
 		var win_screen : Control = WIN_SCREEN.instance()
 		add_child(win_screen)
+
+#This executes very frame
+func _physics_process(_delta):
+	if Input.is_action_just_pressed("power_off"):
+		$PowerOffTimer.start()
+	if Input.is_action_just_released("power_off"):
+		$PowerOffTimer.stop()
+
+#Keep ESC to quit game
+func _on_PowerOffTimer_timeout():
+	get_tree().quit()
+
+#If player loses
+func game_over():
+	$AudioStreamPlayer.queue_free()

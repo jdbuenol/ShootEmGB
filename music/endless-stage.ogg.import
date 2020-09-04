@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/endless-stage.ogg-a5749f463e9ba0a8e935e0ffee41014d.oggstr"
+
+[deps]
+
+source_file="res://music/endless-stage.ogg"
+dest_files=[ "res://.import/endless-stage.ogg-a5749f463e9ba0a8e935e0ffee41014d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

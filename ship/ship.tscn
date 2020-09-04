@@ -64,8 +64,6 @@ anims/default = SubResource( 2 )
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 3 )
 
-[node name="PowerOffTimer" type="Timer" parent="."]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 60, 0 )
 current = true
@@ -82,6 +80,5 @@ one_shot = true
 [node name="spawnEnemy" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
-[connection signal="timeout" from="PowerOffTimer" to="." method="_on_PowerOffTimer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="spawnEnemy" to="." method="_on_spawnEnemy_timeout"]

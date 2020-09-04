@@ -21,7 +21,7 @@ func _physics_process(_delta):
 		if current_button < 0:
 			current_button = 0
 		update_button()
-	if Input.is_action_just_pressed("start"):
+	if Input.is_action_just_pressed("start") or Input.is_action_just_pressed("basic_attack"):
 		if current_button == 0:
 # warning-ignore:return_value_discarded
 			get_tree().change_scene("res://testing_scene.tscn")

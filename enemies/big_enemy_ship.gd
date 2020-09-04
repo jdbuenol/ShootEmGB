@@ -42,6 +42,7 @@ func get_hurt():
 			$Sprite2.visible = true
 			$AnimationPlayer.queue_free()
 			$Sprite.queue_free()
+			$VisibilityNotifier2D.queue_free()
 			$AttackTimer.queue_free()
 			$CollisionShape2D.queue_free()
 			$Particles2D.queue_free()

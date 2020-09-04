@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ship/ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/background/star_1.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://testing_scene.gd" type="Script" id=4]
 [ext_resource path="res://assets/background/star_2.png" type="Texture" id=5]
 [ext_resource path="res://Early GameBoy.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://music/stage-01.ogg" type="AudioStream" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "starblink"
@@ -169,3 +170,11 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -7.0
+autoplay = true
+
+[node name="PowerOffTimer" type="Timer" parent="."]
+[connection signal="timeout" from="PowerOffTimer" to="." method="_on_PowerOffTimer_timeout"]

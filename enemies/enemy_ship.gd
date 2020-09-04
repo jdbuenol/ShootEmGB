@@ -32,6 +32,7 @@ func get_hurt():
 	$AnimationPlayer.queue_free()
 	$Sprite.queue_free()
 	$AttackTimer.queue_free()
+	$VisibilityNotifier2D.queue_free()
 	$CollisionShape2D.queue_free()
 	$Particles2D.queue_free()
 	$AnimationPlayer2.play("death")
