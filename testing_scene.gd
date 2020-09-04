@@ -2,11 +2,16 @@ extends Node2D
 
 const WIN_SCREEN : PackedScene = preload("res://winScreen/winScreen.tscn")
 
+const ice_cream : Color = Color("fff6d3")
+
+var current_level : int = 1
 var score : int = 0
 var win_score : int = 1000
 
 #This executes at the start of the scene
 func _ready():
+	if current_level == 1:
+		$CanvasLayer/Label.add_color_override("font_color", ice_cream)
 	randomize()
 	$ParallaxBackground/ParallaxLayer2/Sprite.rotation_degrees = int(rand_range(0, 360))
 	$ParallaxBackground/ParallaxLayer3/Sprite.rotation_degrees = int(rand_range(0, 360))

@@ -16,9 +16,9 @@ func _ready():
 func _physics_process(_delta):
 	position.x += speed
 	if rng == 1:
-		position.y += speed / 2
+		position.y += speed / 2.0
 	elif rng == 2:
-		position.y -= speed / 2
+		position.y -= speed / 2.0
 	if position.y >= 140:
 		position.y = 140
 	elif position.y <= 4:
@@ -33,6 +33,7 @@ func get_hurt():
 	$Sprite.queue_free()
 	$AttackTimer.queue_free()
 	$CollisionShape2D.queue_free()
+	$Particles2D.queue_free()
 	$AnimationPlayer2.play("death")
 
 #queue free when animation of death ends
@@ -44,10 +45,6 @@ func _on_AnimationPlayer2_animation_finished(anim_name):
 func _on_VisibilityNotifier2D_screen_entered():
 	$AttackTimer.start()
 
-#queue free when the enemy exits the screen
-func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
-
 #Timer to when shoot
 func _on_AttackTimer_timeout():
 	var enemy_bullet : Area2D = ENEMY_BULLET.instance()
@@ -58,3 +55,7 @@ func _on_AttackTimer_timeout():
 func _on_directionTimer_timeout():
 	rng = int(rand_range(0, 3))
 	$directionTimer.start()
+
+# Too much time in screen is dead
+func _on_screenTimer_timeout():
+	queue_free()

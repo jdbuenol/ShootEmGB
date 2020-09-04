@@ -1,10 +1,12 @@
 extends KinematicBody2D
 
-const SPEED : int = 50
+const SPEED : int = 60
 
 const BULLET : PackedScene = preload("res://ship/bullet.tscn")
 const ENEMY_SHIP : PackedScene = preload("res://enemies/enemy_ship.tscn")
+const BIG_ENEMY_SHIP : PackedScene = preload("res://enemies/big_enemy_ship.tscn")
 
+var enemies : Array = [ENEMY_SHIP, BIG_ENEMY_SHIP]
 var velocity : Vector2 = Vector2()
 var attack : bool = false
 
@@ -23,9 +25,9 @@ func _physics_process(_delta):
 	
 	velocity = Vector2()
 	if Input.is_action_pressed("ui_up"):
-		velocity.y = -SPEED
+		velocity.y = -SPEED * 1.2
 	elif Input.is_action_pressed("ui_down"):
-		velocity.y = SPEED
+		velocity.y = SPEED * 1.2
 	
 	if Input.is_action_just_pressed("basic_attack"):
 		if !attack:
@@ -60,13 +62,11 @@ func _on_PowerOffTimer_timeout():
 func _on_AttackTimer_timeout():
 	attack = false
 
-#Spawn enemies every 5 seconds
+#Spawn enemies every 3 seconds
 func _on_spawnEnemy_timeout():
-	var enemy_ship : KinematicBody2D = ENEMY_SHIP.instance()
-	get_parent().add_child(enemy_ship)
-	enemy_ship.global_position = global_position
-	enemy_ship.global_position.x += 200
-	enemy_ship.global_position.y = int(rand_range(20, 124))
+	var enemy : KinematicBody2D = enemies[int(rand_range(0, 2))].instance()
+	get_parent().add_child(enemy)
+	enemy.global_position = Vector2(global_position.x + 160, int(rand_range(20, 124)))
 	$spawnEnemy.start()
 
 #Die
