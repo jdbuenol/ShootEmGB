@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var speed : float = 0
 var rng : int = 0
+var hit_points : int = 1
 
 const ENEMY_BULLET : PackedScene = preload("res://enemies/enemy_bullet.tscn")
 const LASER_UPGRADE : PackedScene = preload("res://upgrades/laser_upgrade.tscn")
@@ -38,18 +39,20 @@ func _physics_process(_delta):
 
 # basic enemy die from one hit
 func get_hurt():
-	get_parent().score += 100
-	get_parent().check_score()
-	$Sprite2.visible = true
-	$AnimationPlayer.queue_free()
-	$Sprite.queue_free()
-	$AttackTimer.queue_free()
-	$VisibilityNotifier2D.queue_free()
-	if rand_range(0, 1) > 0.5:
-		call_deferred("drop_upgrade")
-	$CollisionShape2D.queue_free()
-	$Particles2D.queue_free()
-	$AnimationPlayer2.play("death")
+	if hit_points == 1:
+		hit_points -= 1
+		get_parent().score += 100
+		get_parent().check_score()
+		$Sprite2.visible = true
+		$AnimationPlayer.queue_free()
+		$Sprite.queue_free()
+		$AttackTimer.queue_free()
+		$VisibilityNotifier2D.queue_free()
+		if rand_range(0, 1) > 0.5:
+			call_deferred("drop_upgrade")
+		$CollisionShape2D.queue_free()
+		$Particles2D.queue_free()
+		$AnimationPlayer2.play("death")
 	
 
 #queue free when animation of death ends

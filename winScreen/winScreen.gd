@@ -20,4 +20,6 @@ func _physics_process(_delta):
 
 #if lose
 func fail():
+	$AudioStreamPlayer.stream = load("res://music/fail_song.wav")
+	$AudioStreamPlayer.play()
 	$Label.text = "YOU LOSE!\n PRESS START TO\n CONTINUE"

@@ -57,7 +57,6 @@ margin_right = 157.0
 margin_bottom = 65.0
 color = Color( 0.486275, 0.247059, 0.345098, 1 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
@@ -83,7 +82,6 @@ margin_right = 137.0
 margin_bottom = 94.0
 color = Color( 0.486275, 0.247059, 0.345098, 1 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
@@ -108,7 +106,6 @@ margin_right = 72.0
 margin_bottom = 128.0
 color = Color( 0.486275, 0.247059, 0.345098, 1 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 

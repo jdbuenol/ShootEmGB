@@ -6,6 +6,8 @@ const BULLET : PackedScene = preload("res://ship/bullet.tscn")
 const ENEMY_SHIP : PackedScene = preload("res://enemies/enemy_ship.tscn")
 const BIG_ENEMY_SHIP : PackedScene = preload("res://enemies/big_enemy_ship.tscn")
 const ENEMY_ASTEROID : PackedScene = preload("res://enemies/enemy_asteroid.tscn")
+const SHOOT_FX : PackedScene = preload("res://sound effects/shootFX.tscn")
+const EXPLOSION_FX : PackedScene = preload("res://sound effects/explosionFX.tscn")
 
 var enemies : Array = [ENEMY_SHIP, BIG_ENEMY_SHIP, ENEMY_ASTEROID]
 var velocity : Vector2 = Vector2()
@@ -30,6 +32,7 @@ func _physics_process(_delta):
 	
 	if Input.is_action_just_pressed("basic_attack"):
 		if !attack:
+			get_parent().add_child(SHOOT_FX.instance())
 			if triple_laser:
 				upgraded_attack()
 			else:
@@ -37,6 +40,7 @@ func _physics_process(_delta):
 
 	if Input.is_action_just_pressed("special_attack"):
 		if !super_cooldown and super_counter > 0:
+			get_parent().add_child(EXPLOSION_FX.instance())
 			super_cooldown = true
 			get_parent().bomb()
 			super_counter -= 1

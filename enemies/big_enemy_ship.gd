@@ -48,7 +48,7 @@ func _physics_process(_delta):
 func get_hurt():
 	if !hitted:
 		hit_points -= 1
-		if hit_points <= 0:
+		if hit_points == 0:
 			get_parent().score += 200
 			get_parent().check_score()
 			$Sprite2.visible = true
@@ -61,7 +61,7 @@ func get_hurt():
 			$CollisionShape2D.queue_free()
 			$Particles2D.queue_free()
 			$AnimationPlayer2.play("death")
-		else:
+		elif hit_points == 1:
 			hitted = true
 			$hittedTimer.start()
 
