@@ -52,3 +52,9 @@ func _on_PowerOffTimer_timeout():
 #If player loses
 func game_over():
 	$AudioStreamPlayer.queue_free()
+
+#bomb
+func bomb():
+	for x in get_children():
+		if "enemy" in x.name:
+			x.get_hurt()

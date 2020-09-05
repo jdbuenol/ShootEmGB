@@ -4,6 +4,10 @@ var speed : float = 0
 var rng : int = 0
 
 const ENEMY_BULLET : PackedScene = preload("res://enemies/enemy_bullet.tscn")
+const LASER_UPGRADE : PackedScene = preload("res://upgrades/laser_upgrade.tscn")
+const SUPER_UPGRADE : PackedScene = preload("res://upgrades/super_upgrade.tscn")
+
+var upgrades : Array = [LASER_UPGRADE, SUPER_UPGRADE]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,9 +37,12 @@ func get_hurt():
 	$Sprite.queue_free()
 	$AttackTimer.queue_free()
 	$VisibilityNotifier2D.queue_free()
+	if rand_range(0, 1) > 0.5:
+		call_deferred("drop_upgrade")
 	$CollisionShape2D.queue_free()
 	$Particles2D.queue_free()
 	$AnimationPlayer2.play("death")
+	
 
 #queue free when animation of death ends
 func _on_AnimationPlayer2_animation_finished(anim_name):
@@ -60,3 +67,9 @@ func _on_directionTimer_timeout():
 # Too much time in screen is dead
 func _on_screenTimer_timeout():
 	queue_free()
+
+# Drops a laser upgrade or a bomb
+func drop_upgrade():
+	var upgrade : Area2D = upgrades[int(rand_range(0, upgrades.size()))].instance()
+	get_parent().add_child(upgrade)
+	upgrade.global_position = global_position
