@@ -1,5 +1,9 @@
 extends Area2D
 
+#this executes at the start of the scene
+func _ready():
+	$Sprite.texture = load("res://assets/upgrades/laser_upgrade_" + str(get_parent().current_level) + ".png")
+
 #this executes every frame
 func _physics_process(_delta):
 	position.x += 1

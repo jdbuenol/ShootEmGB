@@ -11,6 +11,14 @@ var upgrades : Array = [LASER_UPGRADE, SUPER_UPGRADE]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if get_parent().current_level == 2:
+		$Particles2D.process_material.set("color", Color("c23a73"))
+	elif get_parent().current_level == 3:
+		$Particles2D.process_material.set("color", Color("94e344"))
+	elif get_parent().current_level == 4:
+		$Particles2D.process_material.set("color", Color("24b3b3"))
+	$Sprite.texture = load("res://assets/enemies/enemy_ship_" + str(get_parent().current_level) + ".png")
+	$Sprite2.texture = load("res://assets/enemies/enemy_ship_death_" + str(get_parent().current_level) + ".png")
 	randomize()
 	speed = rand_range(-0.2, 1.5)
 	$Sprite2.visible = false

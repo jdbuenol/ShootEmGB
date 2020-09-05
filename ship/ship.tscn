@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://assets/ship/ship_attack.png" type="Texture" id=1]
-[ext_resource path="res://assets/ship/ship_fuel.png" type="Texture" id=2]
+[ext_resource path="res://assets/ship/ship_attack_1.png" type="Texture" id=1]
+[ext_resource path="res://assets/ship/ship_fuel_1.png" type="Texture" id=2]
 [ext_resource path="res://ship/ship.gd" type="Script" id=3]
 [ext_resource path="res://Early GameBoy.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://assets/upgrades/bomb_upgrade.png" type="Texture" id=5]
+[ext_resource path="res://assets/upgrades/bomb_upgrade_1.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.0378, 6.34674 )
@@ -52,7 +52,6 @@ script = ExtResource( 3 )
 position = Vector2( -1.52588e-05, 0 )
 texture = ExtResource( 1 )
 vframes = 3
-frame = 2
 
 [node name="fuel" type="Sprite" parent="."]
 texture = ExtResource( 2 )

@@ -2,9 +2,9 @@
 
 [ext_resource path="res://Early GameBoy.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ShootEmGB.gd" type="Script" id=2]
-[ext_resource path="res://assets/ship/ship_attack.png" type="Texture" id=3]
+[ext_resource path="res://assets/ship/ship_attack_1.png" type="Texture" id=3]
 [ext_resource path="res://assets/background/BG_T.png.png" type="Texture" id=4]
-[ext_resource path="res://assets/enemies/enemy_ship.png" type="Texture" id=5]
+[ext_resource path="res://assets/enemies/enemy_ship_1.png" type="Texture" id=5]
 [ext_resource path="res://music/main-title.ogg" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=1]
@@ -68,6 +68,7 @@ margin_right = 152.324
 margin_bottom = 64.8919
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.921569, 0.419608, 0.435294, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "START"
 align = 1
 valign = 1

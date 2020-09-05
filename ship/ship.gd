@@ -18,7 +18,6 @@ var super_cooldown : bool = false
 func _ready():
 	randomize()
 	$AnimationPlayer.play("default")
-	$CanvasLayer/Label.add_color_override("font_color", get_parent().ice_cream)
 
 # This executes every frame
 func _physics_process(_delta):
@@ -42,6 +41,7 @@ func _physics_process(_delta):
 			get_parent().bomb()
 			super_counter -= 1
 			$CanvasLayer/Label.text = str(super_counter)
+			$superTimer.start()
 
 	velocity.x = SPEED * 2
 # warning-ignore:return_value_discarded
@@ -109,3 +109,9 @@ func get_super():
 #Can use the super again
 func _on_superTimer_timeout():
 	super_cooldown = false
+
+#update to the current palette
+func update_palette():
+	$main_ship.texture = load("assets/ship/ship_attack_" + str(get_parent().current_level) + ".png")
+	$fuel.texture = load("assets/ship/ship_fuel_" + str(get_parent().current_level) + ".png")
+	$CanvasLayer/Sprite.texture = load("assets/upgrades/bomb_upgrade_" + str(get_parent().current_level) + ".png")

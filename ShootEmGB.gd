@@ -1,9 +1,12 @@
 extends Control
 
 var current_button : int = 0
+var current_screen : bool = true
 
 const brown : Color = Color(124/255.0, 63/255.0, 88/255.0)
 const strawberry : Color = Color(235/255.0, 107/255.0, 111/255.0)
+
+const SELECT_STAGE : PackedScene = preload("res://main_screen/SelectStage.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,24 +14,26 @@ func _ready():
 
 #This executes every frame
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("ui_down"):
-		current_button += 1
-		if current_button > 2:
-			current_button = 2
-		update_button()
-	elif Input.is_action_just_pressed("ui_up"):
-		current_button -= 1
-		if current_button < 0:
-			current_button = 0
-		update_button()
-	if Input.is_action_just_pressed("start") or Input.is_action_just_pressed("basic_attack"):
-		if current_button == 0:
-# warning-ignore:return_value_discarded
-			get_tree().change_scene("res://testing_scene.tscn")
-		elif current_button == 1:
-			pass
-		elif current_button == 2:
-			get_tree().quit()
+	if current_screen:
+		if Input.is_action_just_pressed("ui_down"):
+			current_button += 1
+			if current_button > 2:
+				current_button = 2
+			update_button()
+		elif Input.is_action_just_pressed("ui_up"):
+			current_button -= 1
+			if current_button < 0:
+				current_button = 0
+			update_button()
+		if Input.is_action_just_pressed("start") or Input.is_action_just_pressed("basic_attack"):
+			if current_button == 0:
+				current_screen = false
+				var select_stage : Control = SELECT_STAGE.instance()
+				add_child(select_stage)
+			elif current_button == 1:
+				pass
+			elif current_button == 2:
+				get_tree().quit()
 	if Input.is_action_just_pressed("power_off"):
 		$powerOff.start()
 	elif Input.is_action_just_released("power_off"):
