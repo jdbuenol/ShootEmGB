@@ -35,15 +35,15 @@ flip_v = true
 [node name="Label" type="Label" parent="."]
 margin_right = 408.0
 margin_bottom = 143.0
-rect_scale = Vector2( 0.4, 1 )
+rect_scale = Vector2( 0.47, 1 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.486275, 0.247059, 0.345098, 1 )
 text = "MADE BY: jdbuenol
-FONT USED: EARLY GAMEBOY
-PALETTES USED: kirokaze gb
-                            icecream gb
-							                            autumn chill
-														                            astro"
+FONT: EARLY GAMEBOY
+PALETTES:  kirokaze gb
+                    icecream gb
+							                    autumn chill
+														                    astro"
 __meta__ = {
 "_edit_use_anchors_": false
 }
