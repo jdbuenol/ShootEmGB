@@ -7,6 +7,7 @@ var current_level : int = 1
 var score : int = 0
 var win_score : int = 1000
 var current_stage : int = 1
+var hs : int = 0
 
 #This executes at the start of the scene
 func _ready():
@@ -27,7 +28,9 @@ func _ready():
 	ice_cream = Color("fff6d3") if current_level == 1 else Color("dad3af") if current_level == 2 else Color("e2f3e4") if current_level == 3 else Color("e2e6cf")
 	$ParallaxBackground/ParallaxLayer/Sprite.texture = load("res://assets/background/bg_" + str(current_level) + ".png")
 	$CanvasLayer/Label.add_color_override("font_color", ice_cream)
+	$CanvasLayer/hi_score.add_color_override("font_color", ice_cream)
 	$ship/CanvasLayer/Label.add_color_override("font_color", ice_cream)
+	hi_score()
 	$ship.update_palette()
 	randomize()
 	$ParallaxBackground/ParallaxLayer2/Sprite.rotation_degrees = int(rand_range(0, 360))
@@ -59,6 +62,9 @@ func check_score():
 			current_stage += 1
 			$ship/spawnEnemy.wait_time = $ship/spawnEnemy.wait_time * (current_stage - 1) / current_stage
 			win_score += 1000 * current_stage
+	if current_level == 4:
+		if score > hs:
+			$CanvasLayer/hi_score.text = "hi " + str(score)
 
 #This executes very frame
 func _physics_process(_delta):
@@ -73,6 +79,11 @@ func _on_PowerOffTimer_timeout():
 
 #If player loses
 func game_over():
+	if current_level == 4 and score > hs:
+		var hi : File = File.new()
+		if hi.open("user://hi_score.save", File.WRITE) == 0:
+			hi.store_line(str(score))
+			hi.close()
 	for x in get_children():
 		if x == $ParallaxBackground or x == $PowerOffTimer:
 			pass
@@ -95,9 +106,8 @@ func update_current_level():
 	if not file.file_exists("user://current_level.save"):
 		print("Error in file system: 01")
 		queue_free()
-# warning-ignore:return_value_discarded
-	file.open("user://current_level.save", File.READ)
-	current_level = int(file.get_line())
+	if file.open("user://current_level.save", File.READ) == 0:
+		current_level = int(file.get_line())
 
 #updates stars to stage palette
 func update_stars():
@@ -106,3 +116,20 @@ func update_stars():
 		$ParallaxBackground/ParallaxLayer4/Sprite2.texture = load("res://assets/background/star_1" + str(current_level) + ".png")
 		$ParallaxBackground/ParallaxLayer3/Sprite.texture = load("res://assets/background/star_2" + str(current_level) + ".png")
 		$ParallaxBackground/ParallaxLayer5/Sprite2.texture = load("res://assets/background/star_2" + str(current_level) + ".png")
+
+#update target score
+func hi_score():
+	if current_level == 1:
+		$CanvasLayer/hi_score.text = "target 1000"
+	elif current_level == 2:
+		$CanvasLayer/hi_score.text = "target 2000"
+	elif current_level == 3:
+		$CanvasLayer/hi_score.text = "target 3000"
+	else:
+		var hi : File = File.new()
+		if !hi.file_exists("user://hi_score.save"):
+			pass
+		else:
+			if hi.open("user://hi_score.save", File.READ) == 0:
+				hs = int(hi.get_line())
+		$CanvasLayer/hi_score.text = "hi " + str(hs)

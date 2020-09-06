@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ship/ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/background/star_1.png" type="Texture" id=2]
@@ -76,6 +76,9 @@ tracks/0/keys = {
 }
 
 [sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 6 )
 
 [node name="testing_scene" type="Node2D"]
@@ -165,6 +168,20 @@ margin_bottom = 21.0
 rect_scale = Vector2( 0.7, 0.7 )
 custom_fonts/font = SubResource( 5 )
 text = "0"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hi_score" type="Label" parent="CanvasLayer"]
+margin_left = 30.0
+margin_top = 130.0
+margin_right = 211.0
+margin_bottom = 150.0
+rect_scale = Vector2( 0.7, 0.7 )
+custom_fonts/font = SubResource( 6 )
+text = "1000"
 align = 2
 valign = 1
 __meta__ = {

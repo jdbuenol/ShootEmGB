@@ -7,6 +7,7 @@ const brown : Color = Color(124/255.0, 63/255.0, 88/255.0)
 const strawberry : Color = Color(235/255.0, 107/255.0, 111/255.0)
 
 const SELECT_STAGE : PackedScene = preload("res://main_screen/SelectStage.tscn")
+const CREDITS : PackedScene = preload("res://main_screen/credits.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,10 +29,10 @@ func _physics_process(_delta):
 		if Input.is_action_just_pressed("start") or Input.is_action_just_pressed("basic_attack"):
 			if current_button == 0:
 				current_screen = false
-				var select_stage : Control = SELECT_STAGE.instance()
-				add_child(select_stage)
+				add_child(SELECT_STAGE.instance())
 			elif current_button == 1:
-				pass
+				current_screen = false
+				add_child(CREDITS.instance())
 			elif current_button == 2:
 				get_tree().quit()
 	if Input.is_action_just_pressed("power_off"):

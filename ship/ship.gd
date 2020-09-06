@@ -8,6 +8,7 @@ const BIG_ENEMY_SHIP : PackedScene = preload("res://enemies/big_enemy_ship.tscn"
 const ENEMY_ASTEROID : PackedScene = preload("res://enemies/enemy_asteroid.tscn")
 const SHOOT_FX : PackedScene = preload("res://sound effects/shootFX.tscn")
 const EXPLOSION_FX : PackedScene = preload("res://sound effects/explosionFX.tscn")
+const DEAD_FX : PackedScene = preload("res://sound effects/deadFX.tscn")
 
 var enemies : Array = [ENEMY_SHIP, BIG_ENEMY_SHIP, ENEMY_ASTEROID]
 var velocity : Vector2 = Vector2()
@@ -15,9 +16,11 @@ var attack : bool = false
 var triple_laser : bool = false
 var super_counter : int = 0
 var super_cooldown : bool = false
+var dead : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$dead_ship.visible = false
 	randomize()
 	$AnimationPlayer.play("default")
 
@@ -25,27 +28,28 @@ func _ready():
 func _physics_process(_delta):
 	
 	velocity = Vector2()
-	if Input.is_action_pressed("ui_up"):
-		velocity.y = -SPEED * 1.2
-	elif Input.is_action_pressed("ui_down"):
-		velocity.y = SPEED * 1.2
+	if !dead:
+		if Input.is_action_pressed("ui_up"):
+			velocity.y = -SPEED * 1.2
+		elif Input.is_action_pressed("ui_down"):
+			velocity.y = SPEED * 1.2
+		
+		if Input.is_action_just_pressed("basic_attack"):
+			if !attack:
+				get_parent().add_child(SHOOT_FX.instance())
+				if triple_laser:
+					upgraded_attack()
+				else:
+					basic_attack()
 	
-	if Input.is_action_just_pressed("basic_attack"):
-		if !attack:
-			get_parent().add_child(SHOOT_FX.instance())
-			if triple_laser:
-				upgraded_attack()
-			else:
-				basic_attack()
-
-	if Input.is_action_just_pressed("special_attack"):
-		if !super_cooldown and super_counter > 0:
-			get_parent().add_child(EXPLOSION_FX.instance())
-			super_cooldown = true
-			get_parent().bomb()
-			super_counter -= 1
-			$CanvasLayer/Label.text = str(super_counter)
-			$superTimer.start()
+		if Input.is_action_just_pressed("special_attack"):
+			if !super_cooldown and super_counter > 0:
+				get_parent().add_child(EXPLOSION_FX.instance())
+				super_cooldown = true
+				get_parent().bomb()
+				super_counter -= 1
+				$CanvasLayer/Label.text = str(super_counter)
+				$superTimer.start()
 
 	velocity.x = SPEED * 2
 # warning-ignore:return_value_discarded
@@ -93,8 +97,15 @@ func _on_spawnEnemy_timeout():
 
 #Die
 func get_hurt():
-	get_parent().game_over()
-	queue_free()
+	get_parent().add_child(DEAD_FX.instance())
+	$AnimationPlayer.queue_free()
+	$AnimationPlayer2.queue_free()
+	$CollisionShape2D.queue_free()
+	$main_ship.queue_free()
+	$fuel.queue_free()
+	dead = true
+	$dead_ship.visible = true
+	$AnimationPlayer3.play("death")
 
 #When get the laser upgrade
 func upgrade_laser():
@@ -118,4 +129,11 @@ func _on_superTimer_timeout():
 func update_palette():
 	$main_ship.texture = load("assets/ship/ship_attack_" + str(get_parent().current_level) + ".png")
 	$fuel.texture = load("assets/ship/ship_fuel_" + str(get_parent().current_level) + ".png")
+	$dead_ship.texture = load("assets/ship/ship_death_" + str(get_parent().current_level) + ".png")
 	$CanvasLayer/Sprite.texture = load("assets/upgrades/bomb_upgrade_" + str(get_parent().current_level) + ".png")
+
+#Death
+func _on_AnimationPlayer3_animation_finished(anim_name):
+	if anim_name == "death":
+		get_parent().game_over()
+		queue_free()
